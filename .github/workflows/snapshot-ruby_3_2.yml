@@ -40,6 +40,7 @@ jobs:
           cat $archname/revision.h
           7z l pkg/*.zip $archname/ChangeLog
       - name: Upload s3
+        if: github.repository == 'ruby/actions'
         run: |
           set -x
           for ext in .tar.gz .tar.xz .zip; do
@@ -54,7 +55,6 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.FTP_R_L_O_AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.FTP_R_L_O_AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: us-west-2
-        if: ${{ github.repository == 'ruby/actions' }}
       - uses: ruby/action-slack@v3.2.1
         with:
           payload: |

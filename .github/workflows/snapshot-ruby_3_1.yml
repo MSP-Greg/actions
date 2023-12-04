@@ -40,6 +40,7 @@ jobs:
           cat $archname/revision.h
           7z l pkg/*.zip $archname/ChangeLog
       - name: Upload s3
+        if: github.repository == 'ruby/actions'
         run: |
           set -x
           for ext in .tar.gz .tar.xz .zip; do
